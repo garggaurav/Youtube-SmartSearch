@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
 
-  "name": "One-click Kittens",
-  "description": "This extension demonstrates a 'browser action' with kittens.",
+  "name": "Youtube Smart Search",
+  "description": "Add another searchbar on the side to search and view results while watching the video.",
   "version": "1.0",
 
   "content_scripts": [

@@ -6,23 +6,24 @@ document.getElementsByTagName('head')[0].appendChild(script);
 var s = document.createElement('script');
 s.type = 'text/javascript';
 var code = 'var orig = document.getElementById("watch7-sidebar-modules").innerHTML; ' +
-'var searchbar = \'<input type="text" id="queryinput"/> <input type="submit" id="side-search-button" value="Search" onclick="executeSearch()"/> \' ;' + 
+'var querystr = "";' +
+'var searchbar = \'<form onsubmit="executeSearch(); return false"> <input type="text" id="queryinput"> <input type="submit" id="side-search-button" value="Search"></form> \' ;' + 
 
 'document.getElementById("watch7-sidebar-modules").innerHTML = searchbar + orig;' +
 
 'function executeSearch()' +
 '{' +
-'var query = document.getElementById("queryinput").value; ' +
-'if(query=="")' +
+'querystr = document.getElementById("queryinput").value; ' +
+'if(querystr=="")' +
 '{' +
    ' document.getElementById("watch7-sidebar-modules").innerHTML = searchbar + orig;' +
 '}' +
 'else {' +
 'var script2 = document.createElement("script");' +
-'script2.src = "//gdata.youtube.com/feeds/mobile/videos?alt=json-in-script&q=" + query + "&callback=SearchYouTube";' +
+'script2.src = "//gdata.youtube.com/feeds/mobile/videos?alt=json-in-script&q=" + querystr + "&callback=SearchYouTube";' +
 'script2.type = "text/javascript";' +
 'document.getElementsByTagName("head")[0].appendChild(script2);' +
-'console.log(query);' +
+'console.log(querystr);' +
 '}}' +
 
 'function SearchYouTube(data)' +  
@@ -43,7 +44,8 @@ var code = 'var orig = document.getElementById("watch7-sidebar-modules").innerHT
             'row += "</tr>";' +
             'row += "</table>";' +
             'row += "</div>"; }' +
-        'document.getElementById("watch7-sidebar-modules").innerHTML = searchbar + row + "</br><hr>"' +
+            'document.getElementById("watch7-sidebar-modules").innerHTML = searchbar + row + "</br><hr>";' +
+            'document.getElementById("queryinput").value = querystr;' +
     '}';
 
 try {
